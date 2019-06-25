@@ -2,7 +2,8 @@ library(shiny)
 library(shinythemes)
 library(RColorBrewer)
 
-df <- read.csv('starbuck.csv')
+df <- read.csv('starbuck.csv') #read csv file
+#shadowtext function from https://stackoverflow.com/questions/25631216/r-plots-is-there-any-way-to-draw-border-shadow-or-buffer-around-text-labels
 shadowtext <- function(x, y=NULL, labels, col='white', bg='black', 
                        theta= seq(0, 2*pi, length.out=50), r=0.1, ... ) {
   
@@ -17,14 +18,15 @@ shadowtext <- function(x, y=NULL, labels, col='white', bg='black',
   # draw actual text in exact xy position in foreground colour
   text(xy$x, xy$y, labels, col=col, ... )
 }
+
+#fuction that plot starbuck cup
 plot_cup <- function(bev_input, bev_size){
   plot.new()
   par(mai = c(1,0,1,0))
-  #plot(0,0,col = 'white',xlim = c(0,24), ylim = c(0,24), asp = 1)
   plot.window(xlim = c(0,24), ylim = c(0,24), asp = 1)
   
   nut_gram <- unlist(bev_input)
-  nut_dens <- c(0.852, 0.8734, 0.9, 1.35, 1.8, 0.849, 1.5)
+  nut_dens <- c(0.852, 0.8734, 0.9, 1.35, 1.8, 0.849, 1.5) #Nutrients density for calculate volme from thiere mass. I find these on internet
   nut_vol <- nut_gram/nut_dens
   
   nut_all <- which(bev_input != 0)
